@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latihan JavaScript</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="data.js" defer></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <strong>Latihan JavaScript</strong>
+      <span>Pemrograman Website</span>
+    </div>
+    <nav class="nav" aria-label="Daftar soal">
+      <button class="nav-item" type="button" data-target="registrasi"><span>Registrasi mahasiswa</span><small>Rekomendasi saat mengetik nama</small></button>
+      <button class="nav-item" type="button" data-target="kodepos"><span>Kode pos Indonesia</span><small>Pencarian berdasarkan wilayah</small></button>
+      <button class="nav-item" type="button" data-target="latihan"><span>Validasi form</span><small>Registrasi dan email</small></button>
+      <button class="nav-item" type="button" data-target="dropdown"><span>Dropdown dinamis</span><small>Jenis produk dan merek</small></button>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="panel" id="registrasi">
+      <header class="panel-head">
+        <h1>Registrasi mahasiswa</h1>
+        <p>Ketik beberapa huruf pada kolom nama untuk melihat rekomendasi mahasiswa. Memilih salah satunya akan mengisi NIM otomatis.</p>
+      </header>
+      <form class="card" id="form-registrasi" novalidate>
+        <div class="grid">
+          <div class="field">
+            <label for="reg-nama">Nama</label>
+            <div class="combo">
+              <input id="reg-nama" name="nama" type="text" autocomplete="off" placeholder="Contoh: Nuris Akbar" role="combobox" aria-expanded="false" aria-controls="reg-saran" aria-autocomplete="list">
+              <ul class="suggest" id="reg-saran" role="listbox" hidden></ul>
+            </div>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="reg-nim">NIM</label>
+            <input id="reg-nim" name="nim" type="text" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="10 digit angka">
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="reg-matkul">Mata kuliah</label>
+            <select id="reg-matkul" name="matkul"></select>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="reg-dosen">Dosen pengampu</label>
+            <select id="reg-dosen" name="dosen"></select>
+            <p class="error"></p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" type="submit">Daftar</button>
+          <button class="btn" type="reset">Reset</button>
+        </div>
+      </form>
+      <div class="card">
+        <h2>Mahasiswa terdaftar</h2>
+        <div class="table-wrap">
+          <table id="reg-tabel">
+            <thead><tr><th>Nama</th><th>NIM</th><th>Mata kuliah</th><th>Dosen</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="kodepos" hidden>
+      <header class="panel-head">
+        <h1>Kode pos Indonesia</h1>
+        <p>Pilih provinsi, kota atau kabupaten, dan kecamatan untuk menemukan kode pos tiap kelurahan. Data yang tersedia adalah contoh untuk latihan dan bisa ditambah di data.js.</p>
+      </header>
+      <form class="card" id="form-kodepos" novalidate>
+        <div class="grid">
+          <div class="field">
+            <label for="pos-provinsi">Provinsi</label>
+            <select id="pos-provinsi" name="provinsi"></select>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="pos-kota">Kota atau kabupaten</label>
+            <select id="pos-kota" name="kota"></select>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="pos-kecamatan">Kecamatan</label>
+            <select id="pos-kecamatan" name="kecamatan"></select>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="pos-kata">Kata kunci (opsional)</label>
+            <input id="pos-kata" name="kata" type="text" autocomplete="off" placeholder="Nama kelurahan atau kode pos">
+            <p class="error"></p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" type="submit">Cari kode pos</button>
+          <button class="btn" type="reset">Reset</button>
+        </div>
+      </form>
+      <div class="card" id="kodepos-hasil" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="panel" id="latihan" hidden>
+      <header class="panel-head">
+        <h1>Validasi form</h1>
+        <p>Setiap kolom diperiksa saat Anda selesai mengisinya, dan seluruh form diperiksa lagi saat dikirim.</p>
+      </header>
+      <div class="split">
+        <form class="card" id="form-latihan" novalidate>
+          <h2>Form registrasi</h2>
+          <div class="field">
+            <label for="lat-nama">Nama</label>
+            <input id="lat-nama" name="nama" type="text" autocomplete="name" placeholder="Nama lengkap">
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="lat-alamat">Alamat</label>
+            <input id="lat-alamat" name="alamat" type="text" autocomplete="street-address" placeholder="Alamat tempat tinggal">
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="lat-email">Alamat email</label>
+            <input id="lat-email" name="email" type="email" autocomplete="email" placeholder="nama@domain.com">
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="lat-sandi">Kata sandi</label>
+            <div class="password">
+              <input id="lat-sandi" name="sandi" type="password" autocomplete="new-password" placeholder="Minimal 8 karakter">
+              <button class="toggle" id="toggle-sandi" type="button" aria-pressed="false">Tampilkan</button>
+            </div>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="lat-kursus">Program studi</label>
+            <select id="lat-kursus" name="kursus"></select>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label for="lat-kampus">Nama kampus</label>
+            <textarea id="lat-kampus" name="kampus" rows="3" placeholder="Nama perguruan tinggi"></textarea>
+            <p class="error"></p>
+          </div>
+          <div class="field">
+            <label class="check"><input type="checkbox" name="setuju"><span>Saya menyetujui informasi di atas</span></label>
+            <p class="error"></p>
+          </div>
+          <p class="status" id="latihan-status" role="status" hidden></p>
+          <div class="actions">
+            <button class="btn primary" type="submit">Kirim</button>
+            <button class="btn" type="reset">Reset</button>
+          </div>
+        </form>
+
+        <form class="card" id="form-email" novalidate>
+          <h2>Validasi email</h2>
+          <div class="field">
+            <label for="em-email">Masukkan email</label>
+            <input id="em-email" name="email" type="email" autocomplete="email" placeholder="contoh@domain.com">
+            <p class="error"></p>
+          </div>
+          <p class="status" id="email-status" role="status" hidden></p>
+          <div class="actions">
+            <button class="btn primary" type="submit">Periksa email</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel" id="dropdown" hidden>
+      <header class="panel-head">
+        <h1>Dropdown dinamis</h1>
+        <p>Pilihan merek berubah mengikuti jenis produk yang dipilih.</p>
+      </header>
+      <div class="card">
+        <div class="row">
+          <div class="field">
+            <label for="produk-jenis">Jenis produk</label>
+            <select id="produk-jenis"></select>
+          </div>
+          <div class="field">
+            <label for="produk-merk">Merek</label>
+            <select id="produk-merk"></select>
+          </div>
+        </div>
+        <output class="output" id="produk-hasil" for="produk-jenis produk-merk">Belum ada produk yang dipilih.</output>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="dialog">
+  <form method="dialog">
+    <div class="dialog-body">
+      <h2 id="dialog-title"></h2>
+      <p id="dialog-message"></p>
+    </div>
+    <div class="dialog-actions">
+      <button class="btn primary" autofocus>Oke</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>
